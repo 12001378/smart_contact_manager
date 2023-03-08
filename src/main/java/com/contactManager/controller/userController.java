@@ -90,7 +90,7 @@ public class userController {
 				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
 				System.out.println("image upladed");
-				session.setAttribute("msg", "image uploaded sucessfully");
+				
 			}
 
 			contact.setUser(user);
@@ -149,11 +149,14 @@ public class userController {
 	}
 
 	@GetMapping("/delete/{cid}")
-	public String deleteContact(@PathVariable("cid") int cid, HttpSession session) {
+	public String deleteContact(@PathVariable("cid") int cid, HttpSession session, Principal p) {
 		Optional<Contact> contactOptional = this.contactRepo.findById(cid);
 		Contact contact = contactOptional.get();
-		contact.setUser(null);
-		this.contactRepo.delete(contact);
+//		contact.setUser(null);
+//		this.contactRepo.delete(contact);
+		User user = this.userRepo.getUserByUsername(p.getName());
+		user.getContacts().remove(contact);
+		this.userRepo.save(user);
 		session.setAttribute("msg", new Message("Contact deleted Sucessfully", "alert-success"));
 
 		return "redirect:/user/show_contacts/0";
@@ -175,10 +178,29 @@ public class userController {
 	@PostMapping("/process_update")
 	public String updateSave(@ModelAttribute Contact contact,@RequestParam("profile") MultipartFile file, HttpSession session,Principal p)
 	{
+		
+	Contact contact1 = 	this.contactRepo.findById(contact.getCid()).get();
 		try {
 			if(!file.isEmpty())
 			{
-				 
+				
+				File deleteFile = new ClassPathResource("static/img").getFile();
+				
+				File file1 = new File(deleteFile,contact1.getImage());
+				file1.delete();
+				
+				
+				File saveFile = new ClassPathResource("static/img").getFile();
+
+				java.nio.file.Path path = Paths
+						.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+				Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+				
+				contact.setImage(file.getOriginalFilename());
+
+			}
+			else {
+				contact.setImage(contact1.getImage());
 			}
 			User user = this.userRepo.getUserByUsername(p.getName());
 			contact.setUser(user);
@@ -189,7 +211,30 @@ public class userController {
 		{
 			e.printStackTrace();
 		}
-		return "normal/update_form";
+		return "redirect:/user/"+contact.getCid()+"/contact";
+	}
+	
+	@GetMapping("/profile")
+	public String viewProfile()
+	{
+		return "normal/view_profile";
+	}
+	
+	
+	
+	@GetMapping("/donate")
+	public String Donate(Model model)
+	{
+		
+	model.addAttribute("title","DONATE-SUPPORT US.");
+		return "normal/donate";
+	}
+	
+	@GetMapping("/tools")
+	public String tools(Model model)
+	{
+		model.addAttribute("title","Settings-Make Your own changes");
+		return "normal/tools";
 	}
 
 }

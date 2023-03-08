@@ -5,9 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -15,18 +13,21 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class MyConfig {
 
+	
+	//1.getting user details service as a bean.
 	@Bean
 	public UserDetailsService getUserDetailsService() {
 		return new UserDetailsServiceImpl();
 
 	}
-	
+	//2.beaning the BCryptepassword encoder.
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder()
 	{
 		return new BCryptPasswordEncoder();
 	}
 	
+	//3. beaning the DAO authenticator to config the user details.
 	@Bean
 	public DaoAuthenticationProvider daoAuthenticationProvider()
 	{
@@ -36,6 +37,8 @@ public class MyConfig {
 		return daoAuthenticationProvider;
 	}
 	
+	//4.beaning HttpSecurity using SecurityFilter chain and config the http Security filter chain.
+	//giving permission to the user as per the assigned role.
 	@Bean
 	protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		http

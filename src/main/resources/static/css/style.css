@@ -1,18 +1,19 @@
 @charset "ISO-8859-1";
 
 body {
-	background: #efefef;
+	background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)),
+		url("/img/background.jpg");
+	background-size: cover;
 }
 
 .bg-color {
 	background: #FA7C53;
-	color: white;
-}
-.txt-color
-{
-color:	#FA7C53;
+	color: black;
 }
 
+.txt-color {
+	color: #FA7C53;
+}
 
 .banner {
 	width: 100%;
@@ -28,7 +29,8 @@ color:	#FA7C53;
 
 .card {
 	padding: 20px;
-	background: white;
+	background: #ffffff;
+	margin-bottom: 20px;
 }
 
 #login .container #login-row #login-column #login-box {
@@ -80,11 +82,12 @@ color:	#FA7C53;
 	display: block;
 	padding: 10px 25px;
 	text-decoration: none;
-	color: gray;
+	color: #ffffff;
 }
 
 .sidebar a:hover {
 	background: #efefef;
+	color: black;
 }
 
 .sidebar .divider {
@@ -112,3 +115,32 @@ color:	#FA7C53;
 	border-radius: 50%;
 	object-fit: cover;
 }
+
+.Aboutcard {
+	background: #ffffff;
+	width: 90%;
+	height: auto;
+	border-radius: 5px;
+}
+
+.AboutcardBody {
+	padding: 20px;
+	font-size: 20px;
+	font-weight: bolder;
+}
+
+/* serach css */
+
+.search-container{
+	position: relative;
+}
+.search-result{
+	position: absolute;
+	background: #ffffff;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid grey;
+	display: none;
+}
+
+

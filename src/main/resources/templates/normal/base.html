@@ -36,11 +36,11 @@
 				<li class="nav-item active fw-bold"><a class="nav-link"
 					th:href="@{/user/index}">Home <span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/about}">About</a></li>
 
-				<li class="nav-item"><a class="nav-link "><i
-						class="fa-solid fa-user"></i> <span th:text="${user.name}"
-						class="text-dark fs-5"></span></a></li>
+
+				<li class="nav-item"><a th:href="@{/user/profile}"
+					class="nav-link "><i class="fa-solid fa-user"></i> <span
+						th:text="${user.name}" class="text-dark fs-5"></span></a></li>
 				<li class="nav-item"><a
 					class="nav-link btn btn-light bg-light text-dark"
 					th:href="@{/logout}">logout</a></li>
@@ -51,16 +51,22 @@
 	<!-- slidebar -->
 	<div class="sidebar bg-dark  mt-3">
 
-		<span onClick="toogleSidebar()" class="crossBtn text-white p-1">&times;</span> <a
-			href="" th:href="@{/user/index}" class="item"><i
-			class="fa-sharp fa-solid fa-house"></i> Home</a> <a href="" th:href="@{/user/show_contacts/0}" class="item"><i
+		<span onClick="toogleSidebar()" class="crossBtn text-white p-1">&times;</span>
+		<a href="" th:href="@{/user/index}" class="item"><i
+			class="fa-sharp fa-solid fa-house"></i> Home</a> <a href=""
+			th:href="@{/user/show_contacts/0}" class="item"><i
 			class="fa-solid fa-address-book"></i> View contacts</a> <a
 			th:href="@{/user/add_contact}" class="item"><i
-			class="fa-solid fa-address-card"></i> Add contact</a> <a href=""
-			class="item"><i class="fa-solid fa-user"></i> Your profile</a> <a
-			href="" class="item"><i class="fa-solid fa-wrench"></i> setting</a> <a
-			th:href="@{/logout}" class="item"><i
-			class="fa-solid fa-right-from-bracket"></i> Logout</a>
+			class="fa-solid fa-address-card"></i> Add contact</a> <a
+			th:href="@{/user/profile}" class="item"><i
+			class="fa-solid fa-user"></i> Your profile</a> <a
+			th:href="@{/user/donate}" class="item"> <i class="fa fa-inr"
+			aria-hidden="true"></i> Donate
+		</a> <a th:href="@{/user/tools}" class="item"><i
+			class="fa-solid fa-wrench"></i> settings</a> 
+			<a th:href="@{/logout}"
+			class="item"><i class="fa-solid fa-right-from-bracket"></i>
+			Logout</a>
 		<div class="divider"></div>
 	</div>
 
@@ -68,8 +74,9 @@
 	<!-- content area -->
 	<div class="content mt-5">
 
-		<i onClick="toogleSidebar()" class="fas fa-bars  bg-dark text-white p-2 m-4"></i>
-		
+		<i onClick="toogleSidebar()"
+			class="fas fa-bars  bg-dark text-white p-2 m-4"></i>
+
 		<div th:replace="${content}"></div>
 
 	</div>
@@ -86,7 +93,7 @@
 
 	<script th:src="@{/js/script.js}"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	
+
 	<script>
 	function deleteContact(cid)
 	{
@@ -110,7 +117,7 @@
 			});
 	}
 	</script>
-	
+
 
 
 </body>

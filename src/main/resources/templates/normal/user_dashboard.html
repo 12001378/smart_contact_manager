@@ -7,7 +7,29 @@
 </head>
 <body>
 	<section>
-		<h1>this is a private dashboard</h1>
+		<div class="container">
+			<div class="card">
+				<div class="card-body text-center">
+					<img style="width: 200px; height: 200px;" class="profile_img"
+						th:src="@{/img/contact_logo.png}" alt="profile" />
+				</div>
+				<h1 class="text-center txt-color font-italic">Start Uploading
+					Your Contacts To Cloud..</h1>
+				<h2 class="text-center text-secondary">We will save it and
+					protect for U.</h2>
+
+				<div class="container text-center mt-3">
+
+
+					<a style="padding: 10px;" th:href="@{/user/add_contact}"
+						class="btn bg-color text-dark"><i
+						class="fa-solid fa-address-card"></i> Add contact</a> <a
+						style="padding: 10px;" href="" th:href="@{/user/show_contacts/0}"
+						class="btn bg-color text-dark"><i
+						class="fa-solid fa-address-book"></i> View contacts</a>
+				</div>
+			</div>
+		</div>
 	</section>
 </body>
 </html>

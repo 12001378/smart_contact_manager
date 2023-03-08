@@ -1,5 +1,7 @@
 package com.contactManager.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Contact {
 //				+ "]";
 //	}
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	public User getUser() {
@@ -92,6 +95,11 @@ public class Contact {
 		this.description = description;
 	}
 	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return this.cid==((Contact)obj).getCid();
+	}
 	
 }
